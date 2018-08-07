@@ -16,28 +16,19 @@ if (VCPKG_LIBRARY_LINKAGE STREQUAL static)
     set(VCPKG_LIBRARY_LINKAGE dynamic)
 endif()
 
-#vcpkg_from_github(
-#	OUT_SOURCE_PATH SOURCE_PATH
-#	REPO openscenegraph/OpenSceneGraph
-#	REF OpenSceneGraph-3.2.1-rc3
-#	SHA512 369c0790ad990cc0f5403209b6e8afe73069f4a467883f9031ac0539bdd090f2cd71487285e515da39bb5a5f67a15548edd479d489dc57374b481ed32ebed0eb
-#	HEAD_REF master
-#)
-
-# Paths used in build
-set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/OpenSceneGraph)
-set(COPY_FROM C:/Users/michael/Development/IFAD-SVN/vendorSRC/OpenSceneGraph)
-message(STATUS "Copying files from ${COPY_FROM} TO ${SOURCE_PATH}")
-file(COPY ${COPY_FROM} DESTINATION ${CURRENT_BUILDTREES_DIR} PATTERN ".svn" EXCLUDE)
-
-#export https://svn.ifad.dk/svn/IFAD/vendorSRC/OpenSceneGraph/tags/3.2.1.4 ${SOURCE_PATH}
+vcpkg_from_github(
+	OUT_SOURCE_PATH SOURCE_PATH
+	REPO openscenegraph/OpenSceneGraph
+	REF OpenSceneGraph-3.6.2-rc3
+	SHA512 369c0790ad990cc0f5403209b6e8afe73069f4a467883f9031ac0539bdd090f2cd71487285e515da39bb5a5f67a15548edd479d489dc57374b481ed32ebed0eb
+	HEAD_REF master
+)
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     # PREFER_NINJA # Disable this option if project cannot be built with Ninja
     OPTIONS
         -DOSG_USE_UTF8_FILENAME=ON
-        -DOSG_USE_QT=OFF
     # OPTIONS_RELEASE -DOPTIMIZE=1
     # OPTIONS_DEBUG -DDEBUGGABLE=1
 )
@@ -56,12 +47,12 @@ file(REMOVE_RECURSE ${OSG_TOOLS})
 file(GLOB OSG_TOOLS_DBG ${CURRENT_PACKAGES_DIR}/debug/bin/*.exe)
 file(REMOVE_RECURSE ${OSG_TOOLS_DBG})
 
-file(GLOB OSG_PLUGINS_DBG ${CURRENT_PACKAGES_DIR}/debug/bin/osgPlugins-3.2.1/*.dll)
-file(COPY ${OSG_PLUGINS_DBG} DESTINATION ${CURRENT_PACKAGES_DIR}/debug/tools/osg/osgPlugins-3.2.1)
-file(GLOB OSG_PLUGINS_REL ${CURRENT_PACKAGES_DIR}/bin/osgPlugins-3.2.1/*.dll)
-file(COPY ${OSG_PLUGINS_REL} DESTINATION ${OSG_TOOL_PATH}/osgPlugins-3.2.1)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin/osgPlugins-3.2.1/)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin/osgPlugins-3.2.1/)
+file(GLOB OSG_PLUGINS_DBG ${CURRENT_PACKAGES_DIR}/debug/bin/osgPlugins-3.6.2/*.dll)
+file(COPY ${OSG_PLUGINS_DBG} DESTINATION ${CURRENT_PACKAGES_DIR}/debug/tools/osg/osgPlugins-3.6.2)
+file(GLOB OSG_PLUGINS_REL ${CURRENT_PACKAGES_DIR}/bin/osgPlugins-3.6.2/*.dll)
+file(COPY ${OSG_PLUGINS_REL} DESTINATION ${OSG_TOOL_PATH}/osgPlugins-3.6.2)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin/osgPlugins-3.6.2/)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin/osgPlugins-3.6.2/)
 
 # Handle copyright
 file(COPY ${SOURCE_PATH}/LICENSE.txt DESTINATION ${CURRENT_PACKAGES_DIR}/share/osg)
