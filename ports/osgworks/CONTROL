@@ -1,0 +1,4 @@
+Source: osgworks
+Version: 3.0.0
+Description:  osgWorks is a set of applications and software tools that add capability for OpenSceneGraph (OSG) software developers.
+Build-Depends: osg

@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5a0f694..918a500 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -104,7 +104,7 @@ ENDIF()
+ 
+ include( CMakeMacros )
+ 
+-include( FindOSGHelper )
++find_package( OpenSceneGraph )
+ 
+ find_package( OpenGL )
+ 
